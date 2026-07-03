@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Preencha sua pré-avaliação para o acompanhamento personalizado com a Dra. Letícia Messias.">
+  <title>Pré-Avaliação — Dra. Letícia Messias</title>
+  <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+
+  <!-- TEXTURA DE PAPEL EDITORIAL FIXA -->
+  <div class="grain"></div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="wrap nav">
+      <a href="index.html" class="logo" aria-label="Página inicial">
+        <img src="./assets/icons/logo.png" alt="Letícia Messias Nutricionista">
+      </a>
+      <a href="index.html" class="btn" style="padding: 0.6em 1.25em; font-size: 0.72rem;">Voltar ao Site</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO DA PRÉ-AVALIAÇÃO -->
+    <section class="hero-form" style="padding-top: var(--space-12); padding-bottom: var(--space-4);">
+      <div class="wrap text-center">
+        <div class="sec-head center">
+          <span class="eyebrow center">Triagem Online</span>
+          <h2>Pré-Avaliação de Perfil</h2>
+          <p style="max-width: 60ch; margin-inline: auto;">
+            Para alinhar suas expectativas e compreender detalhadamente seus objetivos antes do nosso contato inicial, preencha o formulário abaixo. As respostas são tratadas de forma estritamente privativa.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FORMULÁRIO -->
+    <section class="form-section" style="padding-top: var(--space-4); padding-bottom: var(--space-20);">
+      <div class="wrap">
+        <div class="form-card" style="max-width: 600px; margin: 0 auto;">
+          <div class="form-card__header">
+            <h2 class="form-card__title">Seu Perfil Nutricional</h2>
+            <p class="form-card__subtitle">Responda com sinceridade. Todos os campos são obrigatórios.</p>
+          </div>
+
+          <form
+            class="form"
+            data-whatsapp-form
+            data-whatsapp-phone="5519992624315"
+            data-whatsapp-title="Pré-Avaliação — Nova Paciente"
+            novalidate
+          >
+            <div class="form__group">
+              <label class="form__label form__label--required" for="nome">Nome completo</label>
+              <input
+                class="form__input"
+                type="text"
+                id="nome"
+                name="nome"
+                placeholder="Seu nome"
+                required
+                data-label="Nome"
+              >
+              <span class="form__error" id="erro-nome" data-error-for="nome">
+                Por favor, preencha seu nome completo.
+              </span>
+            </div>
+
+            <div class="form__row">
+              <div class="form__group">
+                <label class="form__label form__label--required" for="telefone">WhatsApp</label>
+                <input
+                  class="form__input"
+                  type="tel"
+                  id="telefone"
+                  name="telefone"
+                  placeholder="(19) 99999-9999"
+                  required
+                  data-label="WhatsApp"
+                >
+                <span class="form__error" id="erro-telefone" data-error-for="telefone">
+                  Preencha seu WhatsApp.
+                </span>
+              </div>
+
+              <div class="form__group">
+                <label class="form__label form__label--required" for="email">E-mail</label>
+                <input
+                  class="form__input"
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="seu@email.com"
+                  required
+                  data-label="E-mail"
+                >
+                <span class="form__error" id="erro-email" data-error-for="email">
+                  Preencha um e-mail válido.
+                </span>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label form__label--required" for="objetivo">Qual seu principal objetivo hoje?</label>
+              <div class="form__select-wrap">
+                <select
+                  class="form__select"
+                  id="objetivo"
+                  name="objetivo"
+                  required
+                  data-label="Objetivo Principal"
+                >
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="emagrecimento">Emagrecimento Saudável</option>
+                  <option value="ganho-massa">Hipertrofia / Ganho de Massa Magra</option>
+                  <option value="performance">Melhora da Performance Esportiva</option>
+                  <option value="saude-qualidade">Saúde, Qualidade de Vida e Reeducação</option>
+                </select>
+                <span class="form__error" id="erro-objetivo" data-error-for="objetivo">
+                  Selecione seu objetivo.
+                </span>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label form__label--required" for="formato">Qual formato de atendimento você prefere?</label>
+              <div class="form__select-wrap">
+                <select
+                  class="form__select"
+                  id="formato"
+                  name="formato"
+                  required
+                  data-label="Formato de Atendimento"
+                >
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="presencial">Presencial (Santa Bárbara d'Oeste/SP)</option>
+                  <option value="online">Online (Teleconsulta para qualquer lugar do mundo)</option>
+                  <option value="indiferente">Indiferente / Tanto faz</option>
+                </select>
+                <span class="form__error" id="erro-formato" data-error-for="formato">
+                  Selecione o formato de atendimento preferido.
+                </span>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label form__label--required" for="desafio">Qual seu maior desafio para manter uma alimentação saudável?</label>
+              <div class="form__select-wrap">
+                <select
+                  class="form__select"
+                  id="desafio"
+                  name="desafio"
+                  required
+                  data-label="Maior Desafio"
+                >
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="tempo">Falta de tempo para preparar as refeições</option>
+                  <option value="ansiedade">Ansiedade, estresse e beliscos constantes</option>
+                  <option value="adesao">Dificuldade em manter a constância na dieta</option>
+                  <option value="social">Conciliar a alimentação com a vida social/viagens</option>
+                </select>
+                <span class="form__error" id="erro-desafio" data-error-for="desafio">
+                  Selecione seu maior desafio.
+                </span>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label form__label--required" for="dieta">Você já fez dietas muito restritivas anteriormente?</label>
+              <div class="form__select-wrap">
+                <select
+                  class="form__select"
+                  id="dieta"
+                  name="dieta"
+                  required
+                  data-label="Dietas Restritivas Anteriores"
+                >
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="sim">Sim, várias vezes (mas sempre recupero o peso)</option>
+                  <option value="nao">Não, procuro manter algo equilibrado</option>
+                  <option value="primeira-vez">Será minha primeira vez com acompanhamento profissional</option>
+                </select>
+                <span class="form__error" id="erro-dieta" data-error-for="dieta">
+                  Selecione uma resposta.
+                </span>
+              </div>
+            </div>
+
+            <div class="form__group">
+              <label class="form__label form__label--required" for="urgencia">Quando você gostaria de iniciar o acompanhamento?</label>
+              <div class="form__select-wrap">
+                <select
+                  class="form__select"
+                  id="urgencia"
+                  name="urgencia"
+                  required
+                  data-label="Urgência para Início"
+                >
+                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="imediato">O quanto antes (estou pronta para começar agora)</option>
+                  <option value="esta-semana">Nas próximas semanas</option>
+                  <option value="pesquisando">Apenas pesquisando valores e entendendo o funcionamento</option>
+                </select>
+                <span class="form__error" id="erro-urgencia" data-error-for="urgencia">
+                  Selecione uma opção de início.
+                </span>
+              </div>
+            </div>
+
+            <button class="btn btn--gold btn--full btn--lg" type="submit">
+              Enviar Pré-Avaliação no WhatsApp
+            </button>
+
+            <p class="form__privacy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              🔐 Seus dados estão 100% protegidos e serão utilizados unicamente para a estruturação prévia do seu caso clínico.
+            </p>
+
+            <!-- Mensagem de Sucesso -->
+            <div class="form__success" role="status" aria-live="polite">
+              <div class="form__success-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <p class="form__success-title">Formulário Pronto!</p>
+              <p class="form__success-text">Você será redirecionada para o WhatsApp da Dra. Letícia para finalizar e agendar seu horário.</p>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© 2026 Letícia Messias Nutricionista. Todos os direitos reservados. Design Editorial de Luxo.</p>
+    </div>
+  </footer>
+
+  <script src="./js/main.js"></script>
+</body>
+</html>
