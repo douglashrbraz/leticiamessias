@@ -45,6 +45,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 
+  // --- CARROSSEL DE DEPOIMENTOS NO MOBILE (rolagem automática + arrastar) ---
+  const depoimentosContainer = document.querySelector(".depoimentos__carousel-container");
+  const depoimentosTrack = document.querySelector(".depoimentos__track");
+  const isMobileCarousel = window.matchMedia("(max-width: 900px), (hover: none) and (pointer: coarse)");
+
+  if (depoimentosContainer && depoimentosTrack && isMobileCarousel.matches) {
+    const SPEED = 0.4; // pixels por frame
+    const RESUME_DELAY = 2500; // ms parado após o usuário soltar
+    const halfWidth = depoimentosTrack.scrollWidth / 2;
+    let isPaused = false;
+    let resumeTimeout = null;
+
+    function tick() {
+      if (!isPaused) {
+        depoimentosContainer.scrollLeft += SPEED;
+        if (depoimentosContainer.scrollLeft >= halfWidth) {
+          depoimentosContainer.scrollLeft -= halfWidth;
+        }
+      }
+      requestAnimationFrame(tick);
+    }
+
+    function pause() {
+      isPaused = true;
+      clearTimeout(resumeTimeout);
+    }
+
+    function scheduleResume() {
+      clearTimeout(resumeTimeout);
+      resumeTimeout = setTimeout(() => {
+        isPaused = false;
+      }, RESUME_DELAY);
+    }
+
+    depoimentosContainer.addEventListener("touchstart", pause, { passive: true });
+    depoimentosContainer.addEventListener("touchend", scheduleResume);
+    depoimentosContainer.addEventListener("mousedown", pause);
+    depoimentosContainer.addEventListener("mouseup", scheduleResume);
+    depoimentosContainer.addEventListener("scroll", () => {
+      if (isPaused) scheduleResume();
+    });
+
+    requestAnimationFrame(tick);
+  }
+
   // --- WHATSAPP FORM SUBMISSION ---
   const forms = document.querySelectorAll("[data-whatsapp-form]");
   if (forms.length) {

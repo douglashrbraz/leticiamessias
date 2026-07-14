@@ -487,33 +487,11 @@ header.site-header {
   padding-block: var(--space-6);
 }
 
-/* Efeito de fade nas bordas da esteira */
-.depoimentos__carousel-container::before,
-.depoimentos__carousel-container::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 120px;
-  z-index: 2;
-  pointer-events: none;
-}
-
-.depoimentos__carousel-container::before {
-  left: 0;
-  background: linear-gradient(to right, var(--color-background) 0%, transparent 100%);
-}
-
-.depoimentos__carousel-container::after {
-  right: 0;
-  background: linear-gradient(to left, var(--color-background) 0%, transparent 100%);
-}
-
 .depoimentos__track {
   display: flex;
   gap: var(--space-8);
   width: max-content;
-  animation: scrollMarquee 45s linear infinite;
+  animation: scrollMarquee 90s linear infinite;
 }
 
 .depoimentos__track:hover {
@@ -535,6 +513,23 @@ header.site-header {
 @media (max-width: 480px) {
   .depoimentos-card {
     flex: 0 0 300px;
+  }
+}
+
+/* No mobile: rolagem automática contínua (via JS) que também pode ser arrastada com o dedo */
+@media (max-width: 900px), (hover: none) and (pointer: coarse) {
+  .depoimentos__carousel-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .depoimentos__carousel-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .depoimentos__track {
+    animation: none;
   }
 }
 
