@@ -48,23 +48,45 @@ document.addEventListener("DOMContentLoaded", () => {
   // --- CARROSSEL DE DEPOIMENTOS NO MOBILE (rolagem automática + arrastar) ---
   const depoimentosContainer = document.querySelector(".depoimentos__carousel-container");
   const depoimentosTrack = document.querySelector(".depoimentos__track");
-  const isMobileCarousel = window.matchMedia("(max-width: 900px), (hover: none) and (pointer: coarse)");
 
-  if (depoimentosContainer && depoimentosTrack && isMobileCarousel.matches) {
-    const SPEED = 0.4; // pixels por frame
-    const RESUME_DELAY = 2500; // ms parado após o usuário soltar
-    const halfWidth = depoimentosTrack.scrollWidth / 2;
+  if (depoimentosContainer && depoimentosTrack) {
+    const mq = window.matchMedia("(max-width: 900px), (hover: none) and (pointer: coarse)");
+    let animationId = null;
     let isPaused = false;
     let resumeTimeout = null;
+    const SPEED = 0.4; // pixels por frame
+    const RESUME_DELAY = 2500; // ms parado após o usuário soltar
 
     function tick() {
+      if (!mq.matches) {
+        animationId = null;
+        depoimentosContainer.scrollLeft = 0;
+        return;
+      }
+
       if (!isPaused) {
         depoimentosContainer.scrollLeft += SPEED;
-        if (depoimentosContainer.scrollLeft >= halfWidth) {
+        const halfWidth = depoimentosTrack.scrollWidth / 2;
+        if (halfWidth > 0 && depoimentosContainer.scrollLeft >= halfWidth) {
           depoimentosContainer.scrollLeft -= halfWidth;
         }
       }
-      requestAnimationFrame(tick);
+      animationId = requestAnimationFrame(tick);
+    }
+
+    function startCarousel() {
+      if (mq.matches && !animationId) {
+        setTimeout(() => {
+          animationId = requestAnimationFrame(tick);
+        }, 100);
+      }
+    }
+
+    function stopCarousel() {
+      if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+      }
     }
 
     function pause() {
@@ -79,6 +101,16 @@ document.addEventListener("DOMContentLoaded", () => {
       }, RESUME_DELAY);
     }
 
+    // Ouvir alterações de tamanho de tela/dispositivo
+    mq.addEventListener("change", (e) => {
+      if (e.matches) {
+        startCarousel();
+      } else {
+        stopCarousel();
+        depoimentosContainer.scrollLeft = 0;
+      }
+    });
+
     depoimentosContainer.addEventListener("touchstart", pause, { passive: true });
     depoimentosContainer.addEventListener("touchend", scheduleResume);
     depoimentosContainer.addEventListener("mousedown", pause);
@@ -87,7 +119,14 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isPaused) scheduleResume();
     });
 
-    requestAnimationFrame(tick);
+    // Iniciar se corresponder no carregamento
+    if (mq.matches) {
+      if (document.readyState === "complete") {
+        startCarousel();
+      } else {
+        window.addEventListener("load", startCarousel);
+      }
+    }
   }
 
   // --- WHATSAPP FORM SUBMISSION ---
