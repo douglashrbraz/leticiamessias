@@ -57,6 +57,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const SPEED = 0.4; // pixels por frame
     const RESUME_DELAY = 2500; // ms parado após o usuário soltar
 
+    // Posição própria em ponto flutuante: scrollLeft é arredondado para inteiro
+    // pelo navegador, então reler e somar 0.4px por quadro pode "travar" no
+    // mesmo pixel. Guardamos o valor real aqui e só escrevemos no DOM.
+    let scrollPos = depoimentosContainer.scrollLeft;
+
     function tick() {
       if (!mq.matches) {
         animationId = null;
@@ -65,11 +70,15 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (!isPaused) {
-        depoimentosContainer.scrollLeft += SPEED;
         const halfWidth = depoimentosTrack.scrollWidth / 2;
-        if (halfWidth > 0 && depoimentosContainer.scrollLeft >= halfWidth) {
-          depoimentosContainer.scrollLeft -= halfWidth;
+        scrollPos += SPEED;
+        if (halfWidth > 0 && scrollPos >= halfWidth) {
+          scrollPos -= halfWidth;
         }
+        depoimentosContainer.scrollLeft = scrollPos;
+      } else {
+        // Usuário arrastou manualmente: sincroniza para continuar dali quando retomar
+        scrollPos = depoimentosContainer.scrollLeft;
       }
       animationId = requestAnimationFrame(tick);
     }
@@ -116,6 +125,13 @@ document.addEventListener("DOMContentLoaded", () => {
     depoimentosContainer.addEventListener("mousedown", pause);
     depoimentosContainer.addEventListener("mouseup", scheduleResume);
     depoimentosContainer.addEventListener("scroll", () => {
+      // Também faz o loop quando o usuário arrasta manualmente até o fim,
+      // não só durante a rolagem automática
+      const halfWidth = depoimentosTrack.scrollWidth / 2;
+      if (halfWidth > 0 && depoimentosContainer.scrollLeft >= halfWidth) {
+        depoimentosContainer.scrollLeft -= halfWidth;
+        scrollPos = depoimentosContainer.scrollLeft;
+      }
       if (isPaused) scheduleResume();
     });
 

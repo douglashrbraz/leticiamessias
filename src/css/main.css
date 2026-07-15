@@ -522,6 +522,7 @@ header.site-header {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    scroll-behavior: auto; /* evita que o "smooth" global anime o reset do loop, deixando-o instantâneo/imperceptível */
   }
 
   .depoimentos__carousel-container::-webkit-scrollbar {
